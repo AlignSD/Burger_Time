@@ -2,6 +2,27 @@ const connection = require("../config/connection");
 const orm = require("../config/orm");
 
 var burger = {
+  getBurgers: function(cb) {
+    orm.getBurgers("burgers", function(res) {
+      cb(res);
+    });
+  },
+
+  insertOne: function(cols, vals, cb) {
+    orm.insertOne("burgers", cols, vals, function(res) {
+      cb(res);
+    });
+  },
+  
+  updateOne: function(objColVals, condition, cb) {
+    orm.updateOne("burgers", objColVals, condition, function(res) {
+      cb(res);
+    });
+  }
+};
+
+/*
+var burger = {
     getBurgers: function(tableInput, cb) {
         var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
@@ -45,6 +66,6 @@ var burger = {
       });
   }
 };
-
+*/
 // Export functions for controller (burgers)
 module.exports = burger;

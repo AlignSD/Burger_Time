@@ -3,27 +3,36 @@ const connection = require('./connection')
 var tableName = "burgers";
 
 var orm = {
-    getBurgers: function(callback) {
+    getBurgers: function(tableName, cb) {
         var s = "SELECT * FROM " + tableName;
         connection.query(s, function(err,res) {
-            callback(res);
+            if(err) {
+                throw err;
+            }
+            cb(res);
         });
     },
-    insertOne: function(burgers, callback) {
+    insertOne: function(burgers, cb) {
         var s = "INSERT INTO " + tableName + " (burger_name, devoured) VALUES (?,?)";
         burgers.devoured = burgers.devoured || 0;
         connection.query(s, [
             burgers.burger_name, burgers.devoured
         ], function (err, res) {
-            callback(res);
+            if(err) {
+                throw err;
+            }
+            cb(res);
         });
     },
-    updateOne:function(burgers, callback) {
+    updateOne:function(burgers, cb) {
         var s = "UPDATE " + tableName + " SET burger_name=? WHERE id=?";
         connection.query(s, [
             burgers.burger_name, burgers.id
         ], function(err, res) {
-            callback(res);
+            if(err) {
+                throw err;
+            }
+            cb(res);
         });
     }
 };
