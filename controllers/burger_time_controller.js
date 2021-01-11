@@ -1,59 +1,35 @@
 const express = require ("express");
-const burger = require ('../models/burger');
-
 var router = express.Router();
 
+const burger = require ('../models/burger.js');
+
 // Routing Functionality
-
-router.get("/", function(req, res) {
-    burger.getBurgers(function(data) {
-        var hbsObject = {
+router.get("/", function (req, res) {
+    burger.all( (data) => {
+        let burgerHBSObj = {
             burgers: data
-        };
-        console.log(hbsObject);
-        res.render("index", hbsObject);
-    });
-});
-
-router.post("api/burgers", function(req, res) {
-    burger.insertOne ([
-        "burger_name", "devoured"
-    ], [
-        req.body.burger_name, req.body.devoured
-    ], function(result) {
-        res.json({ id: result.insertId});
-    });
-});
-
-router.put("/api/cats/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
-
-    console.log("condition", condition);
-
-    burger.updateOne({
-        devoured: req.body.devoured
-    }, condition, function(result) {
-        if(result.changedRows == 0) {
-            return res.status(404).end();
-    
-        } else {
-            res.status(200).end();
         }
+        console.log("burgerHBSObj: ", burgerHBSObj);
+        res.render("index", burgerHBSObj);
     });
 });
-/*
-router.delete("/api/burgers/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
 
-    burger.delete(condition, function(result) {
-        if(result.affectedRows == 0) {
-
-            return res.status(404).end();
-        }   else {
-            res.status(200).end();
-        }
+router.post("/api/newburger", function (request, response) {
+    burger.create( request.body.burger_name, (result) => {
+        // return the id of the inserted row
+        // https://github.com/mysqljs/mysql#getting-the-id-of-an-inserted-row
+        response.json({id: result.insertId});
+        console.log("Newly added ID: ", result.insertId);
     });
-}); */
+});
+
+router.put("/api/update", function (request, response) {
+    console.log(request.body.id);
+    burger.update( request.body.id, (result) => {
+        response.json({id: result.insertId});
+        console.log("Updated ID: ", result.insertId);
+    });
+});
 
 // Export controller module
 module.exports = router;
