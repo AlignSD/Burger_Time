@@ -1,6 +1,4 @@
-DROP DATABASE IF EXISTS w71o1aommjrtggrb;
 
-CREATE DATABASE w71o1aommjrtggrb;
 
 USE w71o1aommjrtggrb;
 
