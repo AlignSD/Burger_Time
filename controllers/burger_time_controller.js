@@ -6,7 +6,7 @@ var router = express.Router();
 // Routing Functionality
 
 router.get("/", function(req, res) {
-    cat.all(function(data) {
+    burger.getBurgers(function(data) {
         var hbsObject = {
             burgers: data
         };
@@ -16,13 +16,13 @@ router.get("/", function(req, res) {
 });
 
 router.post("api/burgers", function(req, res) {
-    burger.create{[
+    burger.insertOne ([
         "burger_name", "devoured"
     ], [
         req.body.burger_name, req.body.devoured
     ], function(result) {
         res.json({ id: result.insertId});
-    }};
+    });
 });
 
 router.put("/api/cats/:id", function(req, res) {
@@ -30,7 +30,7 @@ router.put("/api/cats/:id", function(req, res) {
 
     console.log("condition", condition);
 
-    cat.update({
+    burger.updateOne({
         devoured: req.body.devoured
     }, condition, function(result) {
         if(result.changedRows == 0) {
@@ -41,11 +41,11 @@ router.put("/api/cats/:id", function(req, res) {
         }
     });
 });
-
+/*
 router.delete("/api/burgers/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
-    cat.delete(condition, function(result) {
+    burger.delete(condition, function(result) {
         if(result.affectedRows == 0) {
 
             return res.status(404).end();
@@ -53,7 +53,7 @@ router.delete("/api/burgers/:id", function(req, res) {
             res.status(200).end();
         }
     });
-});
+}); */
 
 // Export controller module
 module.exports = router;

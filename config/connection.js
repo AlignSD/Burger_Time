@@ -5,6 +5,7 @@ const mysql = require("mysql");
 var source = {
     localhost: {
     host     : 'localhost',
+    port     : 3306,
     user     : 'root',
     password : 'Twister69',
     database : 'burgers_db'

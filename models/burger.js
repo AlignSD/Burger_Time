@@ -1,7 +1,7 @@
 const connection = require("../config/connection");
 const orm = require("../config/orm");
 
-var burgers = {
+var burger = {
     getBurgers: function(tableInput, cb) {
         var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
