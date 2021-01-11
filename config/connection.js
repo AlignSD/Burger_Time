@@ -25,4 +25,4 @@ var source = {
   });
   
   module.exports = connection;
-  
+}
