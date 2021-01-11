@@ -42,5 +42,19 @@ router.put("/api/cats/:id", function(req, res) {
     });
 });
 
+router.delete("/api/burgers/:id", function(req, res) {
+    var condition = "id = " + req.params.id;
 
+    cat.delete(condition, function(result) {
+        if(result.affectedRows == 0) {
+
+            return res.status(404).end();
+        }   else {
+            res.status(200).end();
+        }
+    });
+});
+
+// Export controller module
+module.exports = router;
 
