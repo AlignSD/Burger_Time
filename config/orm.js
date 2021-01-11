@@ -12,9 +12,9 @@ var orm = {
             cb(res);
         });
     },
-    create: function(newBurger, cb) {
-        var s = "INSERT INTO burgers (burger_name) VALUES (?)";
-        connection.query(s, newBurger, function (err, res) {
+    add: function(addBurger, cb) {
+        var s = 'INSERT INTO burgers (burger_name, devoured) VALUES ("${addBurger}",false);';
+        connection.query(s, [addBurger.toString()], function (err, res) {
             if(err) {
                 throw err;
             }
@@ -22,8 +22,8 @@ var orm = {
         });
     },
     update:function(selectedID, cb) {
-        var s = "UPDATE burgers SET devoured = NOT devoured WHERE id=?";
-        connection.query(s, selectedID, function(err, res) {
+        var s = "UPDATE burgers SET devoured=true WHERE id=?";
+        connection.query(s, [burgerID], function(err, res) {
             if(err) {
                 throw err;
             }

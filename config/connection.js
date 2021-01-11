@@ -7,7 +7,7 @@ var source = {
     host     : 'localhost',
     port     : 3306,
     user     : 'root',
-    password : 'Twister69',
+    password : '',
     database : 'burgers_db'
     }
   };

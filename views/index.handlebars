@@ -1,4 +1,4 @@
-<h1>Burger Time!</h1>
+<!--<h1>Burger Time!</h1>
 
 <h2>Burger list</h2>
 
@@ -40,4 +40,55 @@
     <div class="input-group-append">
   <button type="submit" id="submit">Add Burger</button>
     </div>
-</form>
+</form> <!-->
+
+<h1 class="text-center">Burgers!</h1>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <img src="/assets/burger-image.jpg" class="rounded mx-auto d-block" alt="Mutiple different burgers">
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Burgers to be eaten</h2>
+
+      <ul class="list-group">
+        {{#each burgers}}
+          {{#unless devoured}}
+            {{ burger_name }}
+          {{/unless}}
+        {{/each}}    
+      </ul>
+    </div>
+    <div class="col">
+      <h2>Burgers already eaten</h2>
+
+      <ul class="list-group">
+        {{#each burgers}}
+          {{#if devoured}}
+            {{ burger_name }}
+          {{/if}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-4">
+      <h2>Add a Burger</h2>
+      <form class="create-form">
+        <div class="form-group">
+          <label for="burgername">Burger:</label>
+          <input type="text" id="burgername" name="burger_name">
+          <button type="submit" class="btn btn-primary">Add Burger</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

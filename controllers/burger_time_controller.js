@@ -14,21 +14,24 @@ router.get("/", function (req, res) {
     });
 });
 
-router.post("/api/newburger", function (request, response) {
-    burger.create( request.body.burger_name, (result) => {
-        // return the id of the inserted row
-        // https://github.com/mysqljs/mysql#getting-the-id-of-an-inserted-row
-        response.json({id: result.insertId});
-        console.log("Newly added ID: ", result.insertId);
+router.post('/api/burgers', (req,res)=>{
+    burger.add(req.body.name, (result) => {
+        res.json({id: result.burgerID});
     });
 });
 
-router.put("/api/update", function (request, response) {
-    console.log(request.body.id);
-    burger.update( request.body.id, (result) => {
-        response.json({id: result.insertId});
-        console.log("Updated ID: ", result.insertId);
-    });
+router.put("/api/burgers/:id", function (request, response) {
+    var devoured = req.params.id;
+    console.log('devoured :', devoured);
+
+    burger.update(devoured, function(result) {
+        if (result.changedRows === 0) {
+          // If no rows were changed, then the ID must not exist, so 404
+          return res.status(404).end();
+        }
+        res.status(200).end();
+  
+      })
 });
 
 // Export controller module
