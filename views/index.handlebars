@@ -46,7 +46,7 @@
 
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <img src="/assets/burger-image.jpg" class="rounded mx-auto d-block" alt="Mutiple different burgers">
+    {{!-- <img src="/assets/burger-image.jpg" class="rounded mx-auto d-block" alt="Mutiple different burgers"> --}}
   </div>
 </div>
 
@@ -57,10 +57,11 @@
 
       <ul class="list-group">
         {{#each burgers}}
-          {{#unless devoured}}
-            {{ burger_name }}
-          {{/unless}}
-        {{/each}}    
+        {{#unless devoured}}
+        {{ burger_name }}
+        <button class="change-eaten" data-id="{{id}}">Devoure this thing</button>
+        {{/unless}}
+        {{/each}}
       </ul>
     </div>
     <div class="col">
@@ -68,9 +69,9 @@
 
       <ul class="list-group">
         {{#each burgers}}
-          {{#if devoured}}
-            {{ burger_name }}
-          {{/if}}
+        {{#if devoured}}
+        {{ burger_name }}
+        {{/if}}
         {{/each}}
       </ul>
     </div>

@@ -1,5 +1,6 @@
 $(function() {
   $(".change-eaten").on("click", function(event) {
+    event.preventDefault();
       var id = $(this).data("id");
   
       var devoured = {
@@ -26,7 +27,7 @@ $(function() {
     var newBurger = {
       name: $("#burgername").val().trim(),
     };
-    
+    console.log(newBurger);
     if (!newBurger.name.toString().replace(/\s/g, '').length){
       $('#errorModal').modal('show');
     } else {

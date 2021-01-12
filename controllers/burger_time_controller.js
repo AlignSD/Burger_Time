@@ -20,17 +20,19 @@ router.post('/api/burgers', (req,res)=>{
     });
 });
 
-router.put("/api/burgers/:id", function (request, response) {
+router.put("/api/burgers/:id", function (req, res) {
     var devoured = req.params.id;
     console.log('devoured :', devoured);
 
     burger.update(devoured, function(result) {
-        if (result.changedRows === 0) {
+        console.log(res);
+        if (res.changedRows === 0) {
           // If no rows were changed, then the ID must not exist, so 404
-          return res.status(404).end();
+        //   return res.status(404).end();
+        res.json({id: result.burgerID});
+        } else{
+            res.json({id: result.burgerID});
         }
-        res.status(200).end();
-  
       })
 });
 

@@ -12,9 +12,9 @@ var orm = {
             cb(res);
         });
     },
-    add: function(addBurger, cb) {
-        var s = 'INSERT INTO burgers (burger_name, devoured) VALUES ("${addBurger}",false);';
-        connection.query(s, [addBurger.toString()], function (err, res) {
+    add: function(burger_name, cb) {
+        var s = `INSERT INTO burgers (burger_name) VALUES ("${burger_name}");`;
+        connection.query(s, function (err, res) {
             if(err) {
                 throw err;
             }
@@ -23,7 +23,7 @@ var orm = {
     },
     update:function(selectedID, cb) {
         var s = "UPDATE burgers SET devoured=true WHERE id=?";
-        connection.query(s, [burgerID], function(err, res) {
+        connection.query(s, [selectedID], function(err, res) {
             if(err) {
                 throw err;
             }
